@@ -1,8 +1,7 @@
-import { Component, ComponentFactoryResolver, Input, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 
 import { AdDirective } from './ad.directive';
 import { AdItem } from './ad-item';
-import { AdComponent } from './ad.component';
 
 @Component({
   selector: 'app-ad-banner',
@@ -24,7 +23,7 @@ export class AdBannerComponent implements OnInit, OnDestroy {
 
   private clearTimer: VoidFunction | undefined;
 
-  constructor(private r: ComponentFactoryResolver){
+  constructor(){
 
   }
   ngOnInit(): void {
