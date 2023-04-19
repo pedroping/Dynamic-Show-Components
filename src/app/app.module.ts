@@ -4,7 +4,6 @@ import { AppComponent } from './app.component';
 import { HeroJobAdComponent } from './hero-job-ad.component';
 import { AdBannerComponent } from './ad-banner.component';
 import { HeroProfileComponent } from './hero-profile.component';
-import { AdDirective } from './ad.directive';
 
 @NgModule({
   imports: [ BrowserModule ],
@@ -13,8 +12,7 @@ import { AdDirective } from './ad.directive';
     AppComponent,
     AdBannerComponent,
     HeroJobAdComponent,
-    HeroProfileComponent,
-    AdDirective
+    HeroProfileComponent
   ],
   bootstrap: [ AppComponent ]
 })
