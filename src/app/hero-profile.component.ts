@@ -1,7 +1,5 @@
 import { Component, Input } from '@angular/core';
 
-import { AdComponent } from './ad.component';
-
 @Component({
   template: `
     <div class="hero-profile">
@@ -14,7 +12,7 @@ import { AdComponent } from './ad.component';
     </div>
   `
 })
-export class HeroProfileComponent implements AdComponent {
+export class HeroProfileComponent {
   @Input() data: any;
 }
 

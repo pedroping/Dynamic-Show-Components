@@ -1,7 +1,8 @@
 import { Type } from '@angular/core';
-
+import { HeroJobAdComponent } from './hero-job-ad.component';
+import { HeroProfileComponent } from './hero-profile.component';
 export class AdItem {
-  constructor(public component: Type<any>, public data: any) {}
+  constructor(public component: Type<HeroProfileComponent | HeroJobAdComponent>, public data: any) {}
 }
 
 
