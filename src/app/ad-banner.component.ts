@@ -1,12 +1,12 @@
-import { Component, Input, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
 import { AdItem } from './ad-item';
 
 @Component({
   selector: 'app-ad-banner',
   template: `
     <div class="ad-banner-example">
-      <h3>Advertisements</h3>
-      <ng-template #AdTemplate></ng-template>
+      <div #AdTemplate class="banner"></div>
+      <div #AdTemplate class="banner"></div>
     </div>
   `
 })
@@ -17,12 +17,15 @@ export class AdBannerComponent implements OnInit, OnDestroy {
 
   @ViewChild('AdTemplate', { read: ViewContainerRef }) AdTemplate!: ViewContainerRef; 
 
+  @ViewChildren('AdTemplate', { read: ViewContainerRef }) AdTemplates!: any
+
   private clearTimer: VoidFunction | undefined;
 
   constructor(){
 
   }
   ngOnInit(): void {
+    console.log("AdTemplates", this.AdTemplates)
     this.loadComponent();
     this.getAds();
   }
@@ -32,13 +35,30 @@ export class AdBannerComponent implements OnInit, OnDestroy {
   }
 
   loadComponent() {
+    const Templates = this.AdTemplates?.toArray()
+    console.log("AdTemplates", Templates, Templates?.length)
+
     this.currentAdIndex = (this.currentAdIndex + 1) % this.ads.length;
     const adItem = this.ads[this.currentAdIndex];
 
-    const viewContainerRef2 = this.AdTemplate?.clear()
+    if(Templates){
+      for(let index = 0; index < Templates?.length; index++){
+        const viewContainerRef = Templates[index]?.clear()
+        const AdTemplate = Templates[index]?.createComponent(adItem.component)
+        if(AdTemplate) AdTemplate.instance.data = adItem.data;
+      }
+    }    
+    
+    // Templates?.toArray().foreach((template: any) => {
+    //   const viewContainerRef = template?.clear()
+    //   const AdTemplate = template?.createComponent(adItem.component)
+    //   if(AdTemplate) AdTemplate.instance.data = adItem.data;
+    // })
 
-    const AdTemplate = this.AdTemplate?.createComponent(adItem.component)
-    if(AdTemplate) AdTemplate.instance.data = adItem.data;
+    // const viewContainerRef = this.AdTemplate?.clear()
+
+    // const AdTemplate = this.AdTemplate?.createComponent(adItem.component)
+    // if(AdTemplate) AdTemplate.instance.data = adItem.data;
   }
 
   getAds() {
