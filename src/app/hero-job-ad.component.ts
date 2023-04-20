@@ -9,7 +9,7 @@ import { Component, Input } from '@angular/core';
   `
 })
 export class HeroJobAdComponent{
-  @Input() data: any;
+  data: any;
 }
 
 
