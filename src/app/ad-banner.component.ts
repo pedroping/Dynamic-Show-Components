@@ -36,7 +36,6 @@ export class AdBannerComponent implements OnInit, OnDestroy {
 
   constructor() {}
   ngOnInit(): void {
-    console.log('AdTemplates', this.AdTemplates);
     this.loadComponent();
     this.getAds();
   }
