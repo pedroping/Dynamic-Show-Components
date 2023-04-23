@@ -1,5 +1,14 @@
-import { Component, Input, OnDestroy, OnInit, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  ViewChildren,
+  ViewContainerRef,
+} from '@angular/core';
 import { AdItem } from './ad-item';
+import { AdDirective } from './generate.directive';
 
 @Component({
   selector: 'app-ad-banner',
@@ -7,25 +16,27 @@ import { AdItem } from './ad-item';
     <div class="ad-banner-example">
       <div #AdTemplate class="banner"></div>
       <div #AdTemplate class="banner"></div>
+      <div adHost class="banner" [ads]="ads"></div>
     </div>
-  `
+  `,
 })
 export class AdBannerComponent implements OnInit, OnDestroy {
   @Input() ads: AdItem[] = [];
 
   currentAdIndex = -1;
 
-  @ViewChild('AdTemplate', { read: ViewContainerRef }) AdTemplate!: ViewContainerRef; 
+  @ViewChild('AdTemplate', { read: ViewContainerRef })
+  AdTemplate!: ViewContainerRef;
 
-  @ViewChildren('AdTemplate', { read: ViewContainerRef }) AdTemplates!: any
+  @ViewChildren('AdTemplate', { read: ViewContainerRef }) AdTemplates!: any;
+
+  @ViewChild(AdDirective) adHost! : AdDirective
 
   private clearTimer: VoidFunction | undefined;
 
-  constructor(){
-
-  }
+  constructor() {}
   ngOnInit(): void {
-    console.log("AdTemplates", this.AdTemplates)
+    console.log('AdTemplates', this.AdTemplates);
     this.loadComponent();
     this.getAds();
   }
@@ -35,20 +46,23 @@ export class AdBannerComponent implements OnInit, OnDestroy {
   }
 
   loadComponent() {
-    const Templates = this.AdTemplates?.toArray()
-    console.log("AdTemplates", Templates, Templates?.length)
-
+    
+    const Templates = this.AdTemplates?.toArray();
     this.currentAdIndex = (this.currentAdIndex + 1) % this.ads.length;
     const adItem = this.ads[this.currentAdIndex];
-
-    if(Templates){
-      for(let index = 0; index < Templates?.length; index++){
-        const viewContainerRef = Templates[index]?.clear()
-        const AdTemplate = Templates[index]?.createComponent(adItem.component)
-        if(AdTemplate) AdTemplate.instance.data = adItem.data;
-      }
-    }    
     
+    if(this.adHost){
+      this.adHost.createComponent(this.currentAdIndex)
+    }
+    
+    if (Templates) {
+      for (let index = 0; index < Templates?.length; index++) {
+        const viewContainerRef = Templates[index]?.clear();
+        const AdTemplate = Templates[index]?.createComponent(adItem.component);
+        if (AdTemplate) AdTemplate.instance.data = adItem.data;
+      }
+    }
+
     // Templates?.toArray().foreach((template: any) => {
     //   const viewContainerRef = template?.clear()
     //   const AdTemplate = template?.createComponent(adItem.component)
@@ -68,7 +82,6 @@ export class AdBannerComponent implements OnInit, OnDestroy {
     this.clearTimer = () => clearInterval(interval);
   }
 }
-
 
 /*
 Copyright Google LLC. All Rights Reserved.
