@@ -7,8 +7,8 @@ import {
   ViewChildren,
   ViewContainerRef,
 } from '@angular/core';
-import { AdItem } from './ad-item';
 import { AdDirective } from './generate.directive';
+import { IAd } from './models';
 
 @Component({
   selector: 'app-ad-banner',
@@ -16,12 +16,13 @@ import { AdDirective } from './generate.directive';
     <div class="ad-banner-example">
       <div #AdTemplate class="banner"></div>
       <div #AdTemplate class="banner"></div>
-      <div adHost class="banner" [ads]="ads"></div>
+      <div adHost class="banner" [ads]="newAds"></div>
     </div>
   `,
 })
 export class AdBannerComponent implements OnInit, OnDestroy {
-  @Input() ads: AdItem[] = [];
+ 
+  @Input() newAds!: IAd[]
 
   currentAdIndex = -1;
 
@@ -47,8 +48,8 @@ export class AdBannerComponent implements OnInit, OnDestroy {
   loadComponent() {
     
     const Templates = this.AdTemplates?.toArray();
-    this.currentAdIndex = (this.currentAdIndex + 1) % this.ads.length;
-    const adItem = this.ads[this.currentAdIndex];
+    this.currentAdIndex = (this.currentAdIndex + 1) % this.newAds.length;
+    const adItem = this.newAds[this.currentAdIndex];
     
     if(this.adHost){
       this.adHost.createComponent(this.currentAdIndex)

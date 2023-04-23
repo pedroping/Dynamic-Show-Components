@@ -1,46 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { AdItem } from './ad-item';
+import { Component } from '@angular/core';
 import { HeroProfileComponent } from './hero-profile.component';
 import { HeroJobAdComponent } from './hero-job-ad.component';
+import { IAd } from './models';
 
 @Component({
   selector: 'app-root',
   template: `
     <div>
-      <app-ad-banner [ads]="ads"></app-ad-banner>
+      <app-ad-banner [newAds]="newAds()"></app-ad-banner>
     </div>
   `,
 })
-export class AppComponent implements OnInit {
-  ads: AdItem[] = [];
+export class AppComponent {
 
   constructor() {}
-
-  ngOnInit() {
-    this.ads = this.getAds();
-  }
-  getAds() {
-    return [
-      new AdItem(HeroProfileComponent, {
-        name: 'Bombasto',
-        bio: 'Brave as they come',
-      }),
-      new AdItem(HeroProfileComponent, {
-        name: 'Dr. IQ',
-        bio: 'Smart as they come',
-      }),
-      new AdItem(HeroJobAdComponent, {
-        headline: 'Hiring for several positions',
-        body: 'Submit your resume today!',
-      }),
-      new AdItem(HeroJobAdComponent, {
-        headline: 'Openings in all departments',
-        body: 'Apply today',
-      }),
-    ];
-  }
-
-  newAds() {
+ 
+  newAds(): IAd[] {
     return [
       {
         component: HeroProfileComponent,
@@ -51,14 +26,14 @@ export class AppComponent implements OnInit {
         data: { name: 'Dr. IQ', bio: 'Smart as they come' },
       },
       {
-        component: HeroProfileComponent,
+        component: HeroJobAdComponent,
         data: {
           headline: 'Hiring for several positions',
           body: 'Submit your resume today!',
         },
       },
       {
-        component: HeroProfileComponent,
+        component: HeroJobAdComponent,
         data: { headline: 'Openings in all departments', body: 'Apply today' },
       },
     ];
