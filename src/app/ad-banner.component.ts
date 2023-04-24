@@ -55,7 +55,7 @@ export class AdBannerComponent implements OnInit, OnDestroy {
     const adItem = this.newAds[this.currentAdIndex];
 
     if (this.adHost) {
-      this.adHost.createComponent(this.currentAdIndex);
+      this.adHost.createComponent(adItem);
     }
 
     if (Templates) {

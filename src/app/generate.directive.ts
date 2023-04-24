@@ -8,9 +8,8 @@ export class AdDirective {
   constructor(public viewContainerRef: ViewContainerRef) {}
   @Input() ads!: IAd[];
 
-  createComponent(id: number) {
+  createComponent(adItem: IAd) {
     this.viewContainerRef.clear();
-    const adItem = this.ads[id];
     const componentRef = this.viewContainerRef.createComponent(
       adItem.component
     );
