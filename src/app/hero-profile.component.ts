@@ -10,14 +10,16 @@ import { Component, Input } from '@angular/core';
 
       <strong>Hire this hero today!</strong>
     </div>
-  `
+  `,
 })
 export class HeroProfileComponent {
-  @Input() data: any;
+  data: any;
+  type = "HeroProfile"
+
+  teste() {
+    alert('Teste');
+  }
 }
-
-
-
 
 /*
 Copyright Google LLC. All Rights Reserved.

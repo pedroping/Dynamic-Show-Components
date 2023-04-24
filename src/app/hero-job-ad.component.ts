@@ -6,13 +6,16 @@ import { Component, Input } from '@angular/core';
       <h4>{{data.headline}}</h4>
       {{data.body}}
     </div>
-  `
+  `,
 })
-export class HeroJobAdComponent{
+export class HeroJobAdComponent {
   data: any;
+  type = 'HeroJobAd';
+
+  teste() {
+    alert('Teste');
+  }
 }
-
-
 
 /*
 Copyright Google LLC. All Rights Reserved.
