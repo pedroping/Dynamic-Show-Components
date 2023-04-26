@@ -4,7 +4,6 @@ import {
   ComponentRef,
   Input,
   OnDestroy,
-  OnInit,
   ViewChild,
   ViewChildren,
   ViewContainerRef,
@@ -27,7 +26,7 @@ import { Subject, takeUntil, timer } from 'rxjs';
     <button (click)="Teste()">Teste</button>
   `,
 })
-export class AdBannerComponent implements OnInit, OnDestroy, AfterViewInit {
+export class AdBannerComponent implements OnDestroy, AfterViewInit {
   @Input() newAds!: IAd[];
 
   currentAdIndex = -1;
@@ -45,7 +44,6 @@ export class AdBannerComponent implements OnInit, OnDestroy, AfterViewInit {
   private clearTimer: VoidFunction | undefined;
 
   constructor() {}
-  ngOnInit(): void {}
 
   ngAfterViewInit() {
     this.getAds();
@@ -64,15 +62,6 @@ export class AdBannerComponent implements OnInit, OnDestroy, AfterViewInit {
     const adItem = this.newAds[this.currentAdIndex];
 
     this.directiveComp = this.adHost.createComponent(adItem);
-    this.directiveComp.instance.type == 'HeroJobAd'
-      ? {
-          headline: 'Data Alterada com Teste!',
-          body: 'Data Alterada com Teste!',
-        }
-      : {
-          name: 'Data Alterada com Teste!',
-          bio: 'Data Alterada com Teste!',
-        };
 
     this.dynamicComponentsArray = [];
     for (let index = 0; index < Templates?.length; index++) {
