@@ -31,6 +31,7 @@ export class AdBannerComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() newAds!: IAd[];
 
   currentAdIndex = -1;
+  directiveComp: any;
 
   @ViewChildren('AdTemplate', { read: ViewContainerRef }) AdTemplates!: any;
   @ViewChild(AdDirective) adHost!: AdDirective;
@@ -62,7 +63,16 @@ export class AdBannerComponent implements OnInit, OnDestroy, AfterViewInit {
     this.currentAdIndex = (this.currentAdIndex + 1) % this.newAds.length;
     const adItem = this.newAds[this.currentAdIndex];
 
-    this.adHost.createComponent(adItem);
+    this.directiveComp = this.adHost.createComponent(adItem);
+    this.directiveComp.instance.type == 'HeroJobAd'
+      ? {
+          headline: 'Data Alterada com Teste!',
+          body: 'Data Alterada com Teste!',
+        }
+      : {
+          name: 'Data Alterada com Teste!',
+          bio: 'Data Alterada com Teste!',
+        };
 
     this.dynamicComponentsArray = [];
     for (let index = 0; index < Templates?.length; index++) {
@@ -95,8 +105,9 @@ export class AdBannerComponent implements OnInit, OnDestroy, AfterViewInit {
                 name: 'Data Alterada com Teste!',
                 bio: 'Data Alterada com Teste!',
               };
+        this.adHost.changeData();
+        this.directiveComp.changeDetectorRef.detectChanges();
         componentRef.changeDetectorRef.detectChanges();
-        console.log(componentRef.instance, 'Type', typeof component);
       }
     }
   }
