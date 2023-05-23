@@ -1,7 +1,12 @@
-import { HeroJobAdComponent } from './hero-job-ad.component';
-import { HeroProfileComponent } from './hero-profile.component';
+import { Type } from '@angular/core';
 
 export interface IAd {
-  component: typeof HeroProfileComponent | typeof HeroJobAdComponent;
+  component: Type<Icomponent>;
   data: any;
+}
+
+export interface Icomponent {
+  data: any;
+  type: string;
+  teste: () => void;
 }

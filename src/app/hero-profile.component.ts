@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Icomponent } from './models';
 
 @Component({
   template: `
@@ -12,7 +13,7 @@ import { Component, Input } from '@angular/core';
     </div>
   `,
 })
-export class HeroProfileComponent {
+export class HeroProfileComponent implements Icomponent {
   data: any;
   type = "HeroProfile"
 

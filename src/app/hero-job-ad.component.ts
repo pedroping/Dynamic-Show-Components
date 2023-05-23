@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Icomponent } from './models';
 
 @Component({
   template: `
@@ -8,7 +9,7 @@ import { Component, Input } from '@angular/core';
     </div>
   `,
 })
-export class HeroJobAdComponent {
+export class HeroJobAdComponent implements Icomponent {
   data: any;
   type = 'HeroJobAd';
 
