@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Inject, Type } from '@angular/core';
 import { HeroProfileComponent } from './hero-profile.component';
 import { HeroJobAdComponent } from './hero-job-ad.component';
-import { IAd } from './models';
+import { COMPONENTS, IAd, Icomponent } from './models';
 
 @Component({
   selector: 'app-root',
@@ -12,28 +12,27 @@ import { IAd } from './models';
   `,
 })
 export class AppComponent {
+  constructor(@Inject(COMPONENTS) private components: Type<Icomponent>[]) {}
 
-  constructor() {}
- 
   newAds(): IAd[] {
     return [
       {
-        component: HeroProfileComponent,
+        component: this.components[0],
         data: { name: 'Bombasto', bio: 'Brave as they come' },
       },
       {
-        component: HeroProfileComponent,
+        component: this.components[0],
         data: { name: 'Dr. IQ', bio: 'Smart as they come' },
       },
       {
-        component: HeroJobAdComponent,
+        component: this.components[1],
         data: {
           headline: 'Hiring for several positions',
           body: 'Submit your resume today!',
         },
       },
       {
-        component: HeroJobAdComponent,
+        component: this.components[1],
         data: { headline: 'Openings in all departments', body: 'Apply today' },
       },
     ];

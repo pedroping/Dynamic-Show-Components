@@ -1,4 +1,7 @@
-import { Type } from '@angular/core';
+import { InjectionToken, Type } from '@angular/core';
+
+export const COMPONENTS: InjectionToken<Type<Icomponent>[]> =
+  new InjectionToken('COMPONENTS');
 
 export interface IAd {
   component: Type<Icomponent>;

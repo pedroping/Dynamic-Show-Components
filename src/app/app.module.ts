@@ -5,10 +5,19 @@ import { HeroJobAdComponent } from './hero-job-ad.component';
 import { AdBannerComponent } from './ad-banner.component';
 import { HeroProfileComponent } from './hero-profile.component';
 import { AdDirective } from './generate.directive';
+import { COMPONENTS } from './models';
+
+const comps = [
+  HeroProfileComponent,
+  HeroJobAdComponent
+]
 
 @NgModule({
   imports: [ BrowserModule ],
-  providers: [],
+  providers: [{
+    provide: COMPONENTS,
+    useValue: comps,
+  }],
   declarations: [
     AppComponent,
     AdBannerComponent,
@@ -16,7 +25,7 @@ import { AdDirective } from './generate.directive';
     HeroProfileComponent,
     AdDirective
   ],
-  bootstrap: [ AppComponent ]
+  bootstrap: [ AppComponent ],
 })
 export class AppModule { }
 
